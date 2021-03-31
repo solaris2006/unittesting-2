@@ -32,7 +32,8 @@ public class ExpressionParserTest {
 		StringExpression e = new StringExpression("3 + 2");
 		List<Object> list = new ArrayList<>(Arrays.asList(3, "ADD", 2));
 		Assert.assertEquals(
-			Arrays.asList(3, "ADD", 2), e.getElements());
+			//Arrays.asList(3, "ADD", 2), e.getElements());
+				list, e.getElements());
 
 	}
 	
