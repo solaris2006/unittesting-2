@@ -1,5 +1,6 @@
 package junit;
 
+import static org.siit.BinaryOperator.ADD;
 import static org.siit.BinaryOperator.DIVIDE;
 
 import java.util.ArrayList;
@@ -10,10 +11,14 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.siit.Expression;
+import org.siit.ExpressionEvaluator;
 import org.siit.StringExpression;
 import org.siit.ValidationException;
 
 public class ExpressionParserTest {
+
+
 	
 	@Test
 	public void constantTest() {
@@ -30,10 +35,9 @@ public class ExpressionParserTest {
 	@Test
 	public void oneBinaryOperandTest() {
 		StringExpression e = new StringExpression("3 + 2");
-		List<Object> list = new ArrayList<>(Arrays.asList(3, "ADD", 2));
 		Assert.assertEquals(
-			//Arrays.asList(3, "ADD", 2), e.getElements());
-				list, e.getElements());
+				Arrays.asList(3, ADD, 2),
+				e.getElements());
 
 	}
 	
@@ -58,7 +62,7 @@ public class ExpressionParserTest {
 	public void exampleExpressionWithEnum() {
 		StringExpression e = new StringExpression("8 / 2");
 		Assert.assertEquals(
-				Arrays.asList(8, DIVIDE, 2), 
+				Arrays.asList(8, DIVIDE, 2),
 				e.getElements());
 	}
 	
@@ -70,17 +74,21 @@ public class ExpressionParserTest {
 	
 	//implement the following tests
 	//that were moved from evaulator test class
-	
-//	@Test
-//	public void testOperatorAndMultipleSpaces() {
-//		Assert.assertEquals(
-//				47, parseAndEvaluate("45    + 2"));
-//	}
-	
-//	@Test
-//	public void testConstantWithWhitespace() {
-//		Assert.assertEquals(
-//				324, parseAndEvaluate("  324 "));
-//	}
-	
+
+	@Test
+	public void testOperatorAndMultipleSpaces() {
+		StringExpression e = new StringExpression("45    + 2");
+		Assert.assertEquals(
+				Arrays.asList(45, ADD, 2), e.getElements());
+	}
+
+	@Test
+	public void testConstantWithWhitespace() {
+		StringExpression e = new StringExpression("   324 ");
+		Assert.assertEquals(Arrays.asList(324), e.getElements());
+
+	}
+
+
+
 }

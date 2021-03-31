@@ -10,7 +10,7 @@ public class ExpressionIntegrationTest {
 	@Test
 	public void parseAndEvaluate() {
 		StringExpression e = new StringExpression(
-				"22 / 2 - 1 + 5");
+				"22 / 2  - 1 + 5");
 		int result = ExpressionEvaluator.evaluate(e);
 		
 		Assert.assertEquals(15, result);

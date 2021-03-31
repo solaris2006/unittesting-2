@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.siit.Expression;
 import org.siit.ExpressionEvaluator;
+import org.siit.StringExpression;
+import org.siit.ValidationException;
 
 public class ExpressionEvaluatorTest {
 
@@ -39,7 +41,15 @@ public class ExpressionEvaluatorTest {
 	@Test
 	public void testSimpleAddition() {
 		Assert.assertEquals(
-				5, evaluate(3, "+", 2));
+				5,
+				evaluate(3, "ADD", 2)
+		);
 	}
-	
+
+
+	@Test(expected = ValidationException.class)
+	public void testZeroDivision(){
+		StringExpression e = new StringExpression(" 2 / 0");
+		ExpressionEvaluator.evaluate(e);
+	}
 }
